@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Downhill Application</title>
+
+    <meta name="description" content="Application to check the status of the downhill track">
+    <meta name="author" content="MTB-Club Karlsruhe">
+
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/style.css" rel="stylesheet">
+
+  </head>
+  <body>
+
+  <div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12">
+      <a class="navbar-brand" href="#">Übersicht über den Zustand der Downhill Strecke</a>            
+      <ul class="nav nav-pills">
+        <li class="dropdown pull-right">
+           <a href="#" data-toggle="dropdown" class="dropdown-toggle">Einstellungen<strong class="caret"></strong></a>
+          <ul class="dropdown-menu">
+            <li>
+              <a href="#">Abmelden</a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Zustand</th>
+            <th>Prüftermin</th>
+            <th colspan="3" class="text-center">geprüft</th>
+            <th colspan="3" class="text-center">gewartet</th>
+            <th colspan="3" class="text-center">freigegeben</th>
+            <th>Aktion</th>            
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td class="text-center">am</td>
+            <td class="text-center">von</td>
+            <td class="text-center">Bemerkung</td>
+            <td class="text-center">am</td>
+            <td class="text-center">von</td>
+            <td class="text-center">Bemerkung</td>            
+            <td class="text-center">am</td>
+            <td class="text-center">von</td>
+            <td class="text-center">Bemerkung</td>
+            <td></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="success">
+            <td>1</td>
+            <td>Anlieger 1</td>
+            <td>freig.</td>
+            <td>24.01</td>
+            <td>22.01</td>
+            <td>Max M.</td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
+            <td><i>keine</i></td>
+          </tr>
+          <tr class="warning">
+            <td>2</td>
+            <td>Double 3</td>
+            <td>prüfen</td>
+            <td>20.01</td>
+            <td>13.01</td>
+            <td>Claus C.</td>
+            <td>Erdabrutsch an Landung</td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
+            <td><button type="button" class="btn btn-warning">prüfen</button></td>
+          </tr>
+          <tr class="warning">
+            <td>3</td>
+            <td>Looping 1</td>
+            <td>freigeben</td>
+            <td>20.01</td>
+            <td>20.01</td>
+            <td>Alex A.</td>
+            <td>Rutschig, Hasendraht nötig</td>
+            <td>21.01</td>
+            <td>Berta B.</td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
+            <td><button type="button" class="btn btn-success">freigeben</button></td>
+          </tr>
+          <tr class="danger">
+            <td>4</td>
+            <td>Triple 4</td>
+            <td>gesp.</td>
+            <td>05.01</td>
+            <td>10.01</td>
+            <td>Dora D.</td>
+            <td>Ausgefahren</td>
+            <td>12.01</td>
+            <td>Erwin E.</td>
+            <td>Nicht genug Erde vorhanden</td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
+            <td><button type="button" class="btn btn-warning">prüfen</button></td>
+          </tr>
+          <tr class="success">
+            <td>5</td>
+            <td>Anlieger 2</td>
+            <td>freig.</td>
+            <td>24.01</td>
+            <td>22.01</td>
+            <td>Max M.</td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
+            <td><i>keine</i></td>
+          </tr>
+          <tr class="success">
+            <td>6</td>
+            <td>Kurze links</td>
+            <td>freig.</td>
+            <td>24.01</td>
+            <td>22.01</td>
+            <td>Max M.</td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
+            <td><i>keine</i></td>
+          </tr>
+          <tr class="success">
+            <td>7</td>
+            <td>Kurve rechts</td>
+            <td>freig.</td>
+            <td>24.01</td>
+            <td>22.01</td>
+            <td>Max M.</td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
+            <td><i>keine</i></td>
+          </tr>
+          <tr class="success">
+            <td>8</td>
+            <td>Kurve links</td>
+            <td>freig.</td>
+            <td>24.01</td>
+            <td>22.01</td>
+            <td>Max M.</td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
+            <td><i>keine</i></td>
+          </tr>
+          <tr class="warning">
+            <td>9</td>
+            <td>Anlieger 2</td>
+            <td>prüfen</td>
+            <td>24.01</td>
+            <td>22.01</td>
+            <td>Max M.</td>
+            <td>Stark zugewachsen</td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
+            <td><button type="button" class="btn btn-warning">prüfen</button></td>
+          </tr>
+          <tr class="success">
+            <td>10</td>
+            <td>Anlieger 3</td>
+            <td>freig.</td>
+            <td>24.01</td>
+            <td>22.01</td>
+            <td>Max M.</td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
+            <td><i>keine</i></td>
+          </tr>
+
+          
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+  </body>
+</html>
