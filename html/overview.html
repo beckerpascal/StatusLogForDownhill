@@ -19,8 +19,11 @@
   <div class="container-fluid">
   <div class="row">
     <div class="col-md-12">
-      <a class="navbar-brand" href="#">Übersicht über den Zustand der Downhill Strecke</a>            
+      <a class="navbar-brand" href="#">Übersicht über den Zustand der Downhill Strecke</a>
+      
       <ul class="nav nav-pills">
+        <button type="button" class="btn btn-active" id="button_dh">DH-Strecke</button>
+        <button type="button" class="btn btn-default" id="button_bp">Bikepark</button>
         <li class="dropdown pull-right">
            <a href="#" data-toggle="dropdown" class="dropdown-toggle">Einstellungen<strong class="caret"></strong></a>
           <ul class="dropdown-menu">
@@ -30,7 +33,7 @@
           </ul>
         </li>
       </ul>
-      <table class="table table-hover">
+      <table class="table table-hover" id="overview">
         <thead>
           <tr>
             <th>#</th>
@@ -60,167 +63,10 @@
           </tr>
         </thead>
         <tbody>
-          <tr class="success">
-            <td>1</td>
-            <td>Anlieger 1</td>
-            <td>freig.</td>
-            <td>24.01</td>
-            <td>22.01</td>
-            <td>Max M.</td>
-            <td>-</td>
-            <td>-</td>
-            <td>-</td>
-            <td>-</td>
-            <td>-</td>
-            <td>-</td>
-            <td>-</td>
-            <td><i>keine</i></td>
-          </tr>
-          <tr class="warning">
-            <td>2</td>
-            <td>Double 3</td>
-            <td>prüfen</td>
-            <td>20.01</td>
-            <td>13.01</td>
-            <td>Claus C.</td>
-            <td>Erdabrutsch an Landung</td>
-            <td>-</td>
-            <td>-</td>
-            <td>-</td>
-            <td>-</td>
-            <td>-</td>
-            <td>-</td>
-            <td><button type="button" class="btn btn-warning">prüfen</button></td>
-          </tr>
-          <tr class="warning">
-            <td>3</td>
-            <td>Looping 1</td>
-            <td>freigeben</td>
-            <td>20.01</td>
-            <td>20.01</td>
-            <td>Alex A.</td>
-            <td>Rutschig, Hasendraht nötig</td>
-            <td>21.01</td>
-            <td>Berta B.</td>
-            <td>-</td>
-            <td>-</td>
-            <td>-</td>
-            <td>-</td>
-            <td><button type="button" class="btn btn-success">freigeben</button></td>
-          </tr>
-          <tr class="danger">
-            <td>4</td>
-            <td>Triple 4</td>
-            <td>gesp.</td>
-            <td>05.01</td>
-            <td>10.01</td>
-            <td>Dora D.</td>
-            <td>Ausgefahren</td>
-            <td>12.01</td>
-            <td>Erwin E.</td>
-            <td>Nicht genug Erde vorhanden</td>
-            <td>-</td>
-            <td>-</td>
-            <td>-</td>
-            <td><button type="button" class="btn btn-warning">prüfen</button></td>
-          </tr>
-          <tr class="success">
-            <td>5</td>
-            <td>Anlieger 2</td>
-            <td>freig.</td>
-            <td>24.01</td>
-            <td>22.01</td>
-            <td>Max M.</td>
-            <td>-</td>
-            <td>-</td>
-            <td>-</td>
-            <td>-</td>
-            <td>-</td>
-            <td>-</td>
-            <td>-</td>
-            <td><i>keine</i></td>
-          </tr>
-          <tr class="success">
-            <td>6</td>
-            <td>Kurze links</td>
-            <td>freig.</td>
-            <td>24.01</td>
-            <td>22.01</td>
-            <td>Max M.</td>
-            <td>-</td>
-            <td>-</td>
-            <td>-</td>
-            <td>-</td>
-            <td>-</td>
-            <td>-</td>
-            <td>-</td>
-            <td><i>keine</i></td>
-          </tr>
-          <tr class="success">
-            <td>7</td>
-            <td>Kurve rechts</td>
-            <td>freig.</td>
-            <td>24.01</td>
-            <td>22.01</td>
-            <td>Max M.</td>
-            <td>-</td>
-            <td>-</td>
-            <td>-</td>
-            <td>-</td>
-            <td>-</td>
-            <td>-</td>
-            <td>-</td>
-            <td><i>keine</i></td>
-          </tr>
-          <tr class="success">
-            <td>8</td>
-            <td>Kurve links</td>
-            <td>freig.</td>
-            <td>24.01</td>
-            <td>22.01</td>
-            <td>Max M.</td>
-            <td>-</td>
-            <td>-</td>
-            <td>-</td>
-            <td>-</td>
-            <td>-</td>
-            <td>-</td>
-            <td>-</td>
-            <td><i>keine</i></td>
-          </tr>
-          <tr class="warning">
-            <td>9</td>
-            <td>Anlieger 2</td>
-            <td>prüfen</td>
-            <td>24.01</td>
-            <td>22.01</td>
-            <td>Max M.</td>
-            <td>Stark zugewachsen</td>
-            <td>-</td>
-            <td>-</td>
-            <td>-</td>
-            <td>-</td>
-            <td>-</td>
-            <td>-</td>
-            <td><button type="button" class="btn btn-warning">prüfen</button></td>
-          </tr>
-          <tr class="success">
-            <td>10</td>
-            <td>Anlieger 3</td>
-            <td>freig.</td>
-            <td>24.01</td>
-            <td>22.01</td>
-            <td>Max M.</td>
-            <td>-</td>
-            <td>-</td>
-            <td>-</td>
-            <td>-</td>
-            <td>-</td>
-            <td>-</td>
-            <td>-</td>
-            <td><i>keine</i></td>
-          </tr>
 
+          <tr class="info">
+            <td colspan="14">Loading...</td>            
+          </tr>
           
         </tbody>
       </table>
@@ -230,5 +76,6 @@
 
     <script src="../js/jquery.min.js"></script>
     <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/script.js"></script>
   </body>
 </html>
