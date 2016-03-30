@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Downhill Application</title>
+    <title>MTB-Club KA Übersicht</title>
 
     <meta name="description" content="Application to check the status of the downhill track">
     <meta name="author" content="MTB-Club Karlsruhe">
@@ -17,23 +17,39 @@
   <body>
 
   <div class="container-fluid">
-  <div class="row">
-    <div class="col-md-12">
-      <a class="navbar-brand" href="#">Übersicht über den Zustand der Downhill Strecke</a>
-      
-      <ul class="nav nav-pills">
-        <button type="button" class="btn btn-active" id="button_dh">DH-Strecke</button>
-        <button type="button" class="btn btn-default" id="button_bp">Bikepark</button>
-        <li class="dropdown pull-right">
-           <a href="#" data-toggle="dropdown" class="dropdown-toggle">Einstellungen<strong class="caret"></strong></a>
-          <ul class="dropdown-menu">
-            <li>
-              <a href="#">Abmelden</a>
+
+
+
+      <nav class="navbar navbar-default navbar-static-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Zustandsübersicht</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse pull-right">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#" data-value="1">DH-Strecke</a></li>
+            <li><a href="#" data-value="2">Bikepark</a></li>
+            <li><a href="#" data-value="3">Reports</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Einstellungen <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="#">Abmelden</a></li>
+              </ul>
             </li>
-          </ul>
-        </li>
-      </ul>
-      <table class="table table-hover" id="overview">
+          </ul>         
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+
+    <div class="row">
+    <div class="col-md-12"> 
+      <table class="table table-hover table-striped" id="overview">
         <thead>
           <tr>
             <th>#</th>
@@ -76,6 +92,6 @@
 
     <script src="../js/jquery.min.js"></script>
     <script src="../js/bootstrap.min.js"></script>
-    <script src="../js/script.js"></script>
+    <script src="../js/overview.js"></script>
   </body>
 </html>
