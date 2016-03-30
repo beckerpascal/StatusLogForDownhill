@@ -9,3 +9,15 @@
 img{
   width: 100%;
 }
+
+.question{
+  display: none;
+}
+
+.question textarea{
+  width: 100%;
+}
+
+.textfield{
+  margin-top: 15px;
+}
