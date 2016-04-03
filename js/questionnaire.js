@@ -25,13 +25,13 @@ $(document).ready(function() {
   });
 
   $('#btn_username').click(function(){
-    // name = $('#username').val();
-    // console.log(name);
-    // if(name != ''){
+    name = $('#username').val();
+    console.log(name);
+    if(name != ''){
       $('.overlay').hide(500);
-    // }else{
-    //   $('#username_error').show();
-    // }
+    }else{
+      $('#username_error').show();
+    }
   });
 
 });
