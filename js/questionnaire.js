@@ -28,6 +28,18 @@ $(document).ready(function() {
     $('#navbar').collapse('hide');
   });
 
+  $('.question-answer').click(function(){
+    if($(this).hasClass('yes')){
+      $(this).addClass('btn-success');
+      $(this).nextAll('.textfield').hide();
+      $(this).next('.no').removeClass('btn-danger');
+    }else{
+      $(this).addClass('btn-danger');
+      $(this).nextAll('.textfield').show();
+      $(this).prev('.yes').removeClass('btn-success');
+    }
+  });
+
 });
 
 function nextQuestion(){

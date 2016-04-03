@@ -20,4 +20,10 @@ img{
 
 .textfield{
   margin-top: 15px;
+  margin-bottom: 41px;
+  display: none;
+}
+
+.question-answer{
+  margin-bottom: 7px;
 }
