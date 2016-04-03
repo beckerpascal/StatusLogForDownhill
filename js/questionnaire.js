@@ -41,12 +41,11 @@ $(document).ready(function() {
 
   $('.question-answer').click(function(){
     send = false;
-
     var progress_bar = $('.progress-bar');
 
-    if(!$(this).prevAll('.question').hasClass('answered')){
-
-      $(this).prevAll('.question').addClass('answered');
+    // check whether question was already answered
+    if(!$('div.question:visible').hasClass('answered')){
+      $('div.question:visible').addClass('answered');
       questions_answered++;
       console.log('amount: ' + questions_amount + ' answered: ' + questions_answered);
       progress_bar.width((questions_answered/questions_amount)*100 + '%');
@@ -55,6 +54,8 @@ $(document).ready(function() {
         progress_bar.addClass('progress-bar-success');
       }
     }
+
+    // user pressed yes or no
     if($(this).hasClass('yes')){
       $(this).addClass('btn-success');
       $(this).nextAll('.textfield').hide();
