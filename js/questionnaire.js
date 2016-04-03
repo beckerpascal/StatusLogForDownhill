@@ -1,6 +1,6 @@
 var cur_question = 0;
-var questions = $('.question');
-var questions_amount = questions.length - 1; // excludes confirmation page
+var questions;
+var questions_amount;
 var questions_answered = 0;
 
 var send = true;
@@ -8,13 +8,13 @@ var name = '';
 
 $(document).ready(function() {
 
+  getQuestionnaire(1);
+
   window.onbeforeunload = function() {
     if(!send){
       return "Möchtest du die Seite wirklich verlassen? Alle bisher getätigten Eingaben gehen verloren!";
     }
   }
-
-  $(questions.get(cur_question)).show(400);
 
   $('#next').click(function(){
     nextQuestion();
@@ -24,7 +24,21 @@ $(document).ready(function() {
     previousQuestion();
   });
 
+  $('#btn_username').click(function(){
+    // name = $('#username').val();
+    // console.log(name);
+    // if(name != ''){
+      $('.overlay').hide(500);
+    // }else{
+    //   $('#username_error').show();
+    // }
+  });
+
+});
+
+function setMenuButtons(){
   $('.construction_link').click(function(){
+    console.log('CLICK!');
     $('li.active').removeClass('active');
     $(this).parent().addClass('active');
     var con_nr = $(this).data("construction");
@@ -38,7 +52,9 @@ $(document).ready(function() {
     showQuestion(goTo);
     $('#navbar').collapse('hide');
   });
+}
 
+function setAnswerButtons(){
   $('.question-answer').click(function(){
     send = false;
     var progress_bar = $('.progress-bar');
@@ -67,18 +83,7 @@ $(document).ready(function() {
       $(this).prev('.yes').removeClass('btn-success');
     }
   });
-
-  $('#btn_username').click(function(){
-    name = $('#username').val();
-    console.log(name);
-    if(name != ''){
-      $('.overlay').hide(500);
-    }else{
-      $('#username_error').show();
-    }
-  });
-
-});
+}
 
 function nextQuestion(){
   showQuestion(cur_question + 1);
@@ -106,5 +111,31 @@ function setCurrentQuestionLinkActive(number){
   $('li.active').removeClass('active');
   var cur_number = $(questions.get(cur_question)).data("construction");
   $(".construction_link[data-construction='" + cur_number + "']").parent().addClass('active');
+}
 
+function getQuestionnaire(type){
+  var data = '&newQuestionnaire=' + type;
+
+  jQuery.ajax({
+    type: "POST",
+    url: '../php/databaseQuery.php',
+    dataType: "text",
+    data: data,
+    success:function(response){
+      console.log("received questionnaire...");
+      console.log("response: " + response);
+      var response_arr = response.split('~??~??~');
+      $('#navbar-entries').html(response_arr[0]);
+      setMenuButtons();
+      $('#questions').html(response_arr[1]);
+      setAnswerButtons();
+      questions = $('.question');
+      questions_amount = questions.length - 1; // excludes confirmation page
+      showQuestion(0);
+    },
+    error: function(XMLHttpRequest, textStatus, errorThrown) { 
+      console.log("Status: " + textStatus); 
+      console.log("Error: " + errorThrown); 
+    } 
+  });
 }
