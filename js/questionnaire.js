@@ -1,7 +1,10 @@
 var cur_question = 0;
 var questions = $('.question');
+var questions_amount = questions.length - 1; // excludes confirmation page
+var questions_answered = 0;
 
 var send = true;
+var name = '';
 
 $(document).ready(function() {
 
@@ -38,6 +41,20 @@ $(document).ready(function() {
 
   $('.question-answer').click(function(){
     send = false;
+
+    var progress_bar = $('.progress-bar');
+
+    if(!$(this).prevAll('.question').hasClass('answered')){
+
+      $(this).prevAll('.question').addClass('answered');
+      questions_answered++;
+      console.log('amount: ' + questions_amount + ' answered: ' + questions_answered);
+      progress_bar.width((questions_answered/questions_amount)*100 + '%');
+      progress_bar.text(questions_answered + '/' + questions_amount + ' Fragen beantwortet');
+      if(questions_answered == questions_amount){
+        progress_bar.addClass('progress-bar-success');
+      }
+    }
     if($(this).hasClass('yes')){
       $(this).addClass('btn-success');
       $(this).nextAll('.textfield').hide();
@@ -45,7 +62,18 @@ $(document).ready(function() {
     }else{
       $(this).addClass('btn-danger');
       $(this).nextAll('.textfield').show();
+      $(this).nextAll('.textfield').focus()
       $(this).prev('.yes').removeClass('btn-success');
+    }
+  });
+
+  $('#btn_username').click(function(){
+    name = $('#username').val();
+    console.log(name);
+    if(name != ''){
+      $('.overlay').hide(500);
+    }else{
+      $('#username_error').show();
     }
   });
 

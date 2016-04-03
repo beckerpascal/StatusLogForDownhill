@@ -18,7 +18,7 @@
 
   <div class="container-fluid">
 
-		<div class="row">
+		<div class="row construction-links">
 			<div class="col-md-12">
 				<nav class="navbar navbar-default navbar-fixed-top">
 		      <div class="container">
@@ -43,6 +43,10 @@
 		    </nav>	    
 			</div>
 		</div>
+
+    <div class="row">
+       
+    </div>
 
 		<div class="row question" data-construction="1">
 	    <div class="col-md-12 padding-0">
@@ -118,12 +122,9 @@
     </div>
 
     <div class="row question" data-construction="4">
-      <div class="col-md-12 padding-0">
-        <img class="center-block" src="../img/bauwerk1.jpg" />
-      </div>
       <div class="col-md-12">
-        <h3>
-          Fragebogen abschließen und Ergebnis senden
+        <h3 style="margin-bottom: 50px;">
+          Fragebogen abschließen und Ergebnis senden?
         </h3>
         <button type="button" class="col-xs-12 btn btn-success">Absenden</button>
         </div>
@@ -132,7 +133,13 @@
 
 	</div>
 
+
   <footer class="footer navbar-fixed-bottom">
+    <div class="col-md-12 progress padding-0 margin-0">
+      <div class="progress-bar" role="progressbar" aria-valuenow="45"
+      aria-valuemin="0" aria-valuemax="100" style="width:0%">
+      </div>
+    </div> 
     <div class="btn-group btn-group-justified" role="group" aria-label="...">
       <div class="btn-group" role="group">
         <button type="button" class="btn btn-default" id="previous">Vorherige</button>
@@ -142,6 +149,15 @@
       </div>
     </div>
   </footer>
+
+  <div class="overlay">
+    <div class="overlay-content">
+      <h3>Bitte Namen eintragen:</h3>
+      <input type="text" size="10" class="form-control" id="username"/><br/>
+      <span id="username_error" style="display: none;">Eingabe ungültig! Bitte erneut versuchen</span><br/>
+      <button type="button" class="btn btn-default" id="btn_username">Weiter →</button>
+    </div>
+  </div>
 
     <script src="../js/jquery.min.js"></script>
     <script src="../js/bootstrap.min.js"></script>
