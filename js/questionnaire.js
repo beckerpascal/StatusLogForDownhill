@@ -1,7 +1,15 @@
 var cur_question = 0;
 var questions = $('.question');
 
+var send = true;
+
 $(document).ready(function() {
+
+  window.onbeforeunload = function() {
+    if(!send){
+      return "Möchtest du die Seite wirklich verlassen? Alle bisher getätigten Eingaben gehen verloren!";
+    }
+  }
 
   $(questions.get(cur_question)).show(400);
 
@@ -29,6 +37,7 @@ $(document).ready(function() {
   });
 
   $('.question-answer').click(function(){
+    send = false;
     if($(this).hasClass('yes')){
       $(this).addClass('btn-success');
       $(this).nextAll('.textfield').hide();
