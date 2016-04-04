@@ -28,7 +28,8 @@ $(document).ready(function() {
     name = $('#username').val();
     console.log(name);
     if(name != ''){
-      $('.overlay').hide(500);
+      $('#overlay').hide(500);
+      $('#main_content').show();
     }else{
       $('#username_error').show();
     }
@@ -76,6 +77,7 @@ function setAnswerButtons(){
       $(this).addClass('btn-success');
       $(this).nextAll('.textfield').hide();
       $(this).next('.no').removeClass('btn-danger');
+      nextQuestion();
     }else{
       $(this).addClass('btn-danger');
       $(this).nextAll('.textfield').show();
