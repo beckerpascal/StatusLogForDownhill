@@ -9,7 +9,6 @@ var name = '';
 $(document).ready(function() {
 
   getQuestionnaire(1);
-
   setSendButton('');
 
   window.onbeforeunload = function() {
@@ -46,6 +45,15 @@ $(document).ready(function() {
 
 });
 
+function init(){
+  setMenuButtons();
+  setAnswerButtons();
+  questions = $('.question');
+  questions_amount = questions.length - 1; // excludes confirmation page
+  showQuestion(0);
+  setProgressBarStatus();
+}
+
 function setMenuButtons(){
   $('.construction_link').click(function(){
     console.log('CLICK!');
@@ -67,19 +75,13 @@ function setMenuButtons(){
 function setAnswerButtons(){
   $('.question-answer').click(function(){
     send = false;
-    var progress_bar = $('.progress-bar');
 
     // check whether question was already answered
     if(!$('div.question:visible').hasClass('answered')){
       $('div.question:visible').addClass('answered');
       questions_answered++;
       console.log('amount: ' + questions_amount + ' answered: ' + questions_answered);
-      progress_bar.width((questions_answered/questions_amount)*100 + '%');
-      progress_bar.text(questions_answered + '/' + questions_amount + ' Fragen beantwortet');
-      if(questions_answered == questions_amount){
-        progress_bar.addClass('progress-bar-success');
-        $('#btn-send').addClass('btn-success');
-      }
+      setProgressBarStatus();
     }
 
     // user pressed yes or no
@@ -95,6 +97,17 @@ function setAnswerButtons(){
       $(this).prev('.yes').removeClass('btn-success');
     }
   });
+}
+
+function setProgressBarStatus(){
+    var progress_bar = $('.progress-bar');
+    progress_bar.width((questions_answered/questions_amount)*100 + '%');
+    $('#progressbar-text').text(questions_answered + '/' + questions_amount + ' Fragen beantwortet');
+
+    if(questions_answered == questions_amount){
+      progress_bar.addClass('progress-bar-success');
+      $('#btn-send').addClass('btn-success');
+    }
 }
 
 function nextQuestion(){
@@ -149,12 +162,8 @@ function getQuestionnaire(type){
       console.log("response: " + response);
       var response_arr = response.split('~??~??~');
       $('#navbar-entries').html(response_arr[0]);
-      setMenuButtons();
       $('#questions').html(response_arr[1]);
-      setAnswerButtons();
-      questions = $('.question');
-      questions_amount = questions.length - 1; // excludes confirmation page
-      showQuestion(0);
+      init();
     },
     error: function(XMLHttpRequest, textStatus, errorThrown) { 
       console.log("Status: " + textStatus); 

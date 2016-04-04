@@ -59,3 +59,15 @@ img{
 #main_content, #btn-send-msg{
   display: none;
 }
+
+.progress {
+    position: relative;
+}
+
+.progress span {
+    position: absolute;
+    display: block;
+    width: 100%;
+    color: black;
+    font-weight: bold;
+ }
