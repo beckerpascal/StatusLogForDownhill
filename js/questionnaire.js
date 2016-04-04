@@ -26,7 +26,7 @@ $(document).ready(function() {
     previousQuestion();
   });
 
-  $('#btn_username').click(function(){
+  $('#btn-username').click(function(){
     name = $('#username').val();
     console.log(name);
     if(name != ''){
@@ -34,6 +34,13 @@ $(document).ready(function() {
       $('#main_content').show();
     }else{
       $('#username_error').show();
+    }
+  });
+
+  $('#username').keypress(function (e) {
+    if (e.which == 13) {
+      $('#btn-username').trigger('click');
+      return false;    //<---- Add this line
     }
   });
 
