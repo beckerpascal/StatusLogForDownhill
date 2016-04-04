@@ -10,6 +10,8 @@ $(document).ready(function() {
 
   getQuestionnaire(1);
 
+  setSendButton('');
+
   window.onbeforeunload = function() {
     if(!send){
       return "Möchtest du die Seite wirklich verlassen? Alle bisher getätigten Eingaben gehen verloren!";
@@ -69,6 +71,7 @@ function setAnswerButtons(){
       progress_bar.text(questions_answered + '/' + questions_amount + ' Fragen beantwortet');
       if(questions_answered == questions_amount){
         progress_bar.addClass('progress-bar-success');
+        $('#btn-send').addClass('btn-success');
       }
     }
 
@@ -113,6 +116,17 @@ function setCurrentQuestionLinkActive(number){
   $('li.active').removeClass('active');
   var cur_number = $(questions.get(cur_question)).data("construction");
   $(".construction_link[data-construction='" + cur_number + "']").parent().addClass('active');
+}
+
+function setSendButton(text){
+  $('#btn-send').on('click', function(){
+    if(questions_answered != questions_amount){
+      $('#btn-send-msg').show();      
+    }else{
+      $('#btn-send-msg').html('Erfolgreich verschickt!');
+      $('#btn-send-msg').show();      
+    }
+  });
 }
 
 function getQuestionnaire(type){

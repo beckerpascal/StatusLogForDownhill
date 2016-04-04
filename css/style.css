@@ -56,6 +56,6 @@ img{
   text-align: center; /* Centered text/links */
 }
 
-#main_content{
+#main_content, #btn-send-msg{
   display: none;
 }
