@@ -38,7 +38,7 @@ $(document).ready(function() {
   $('#username').keypress(function (e) {
     if (e.which == 13) {
       $('#btn-username').trigger('click');
-      return false;    //<---- Add this line
+      return false;
     }
   });
 
@@ -55,7 +55,6 @@ function init(){
 
 function setMenuButtons(){
   $('.construction_link').click(function(){
-    console.log('CLICK!');
     $('li.active').removeClass('active');
     $(this).parent().addClass('active');
     var con_nr = $(this).data("construction");
@@ -75,27 +74,33 @@ function setAnswerButtons(){
   $('.question-answer').click(function(){
     send = false;
 
-    // check whether question was already answered
-    if(!$('div.question:visible').hasClass('answered')){
-      $('div.question:visible').addClass('answered');
-      questions_answered++;
-      console.log('amount: ' + questions_amount + ' answered: ' + questions_answered);
-      setProgressBarStatus();
-    }
-
     // user pressed yes or no
     if($(this).hasClass('yes')){
       $(this).addClass('btn-success');
       $(this).nextAll('.textfield').hide();
       $(this).next('.no').removeClass('btn-danger');
+      questionAnswered();
       nextQuestion();
     }else{
       $(this).addClass('btn-danger');
-      $(this).nextAll('.textfield').show();
-      $(this).nextAll('.textfield').focus()
+      var textfield = $(this).nextAll('.textfield');
+      textfield.show();
+      textfield.on('input',function(e){
+        questionAnswered();
+      });
+      $("html, body").animate({ scrollTop: $(document).height() }, "slow");
       $(this).prev('.yes').removeClass('btn-success');
     }
   });
+}
+
+function questionAnswered(){
+  // check whether question was already answered
+  if(!$('div.question:visible').hasClass('answered')){
+    $('div.question:visible').addClass('answered');
+    questions_answered++;
+    setProgressBarStatus();
+  }
 }
 
 function setProgressBarStatus(){
@@ -149,8 +154,11 @@ function setSendButton(text){
 }
 
 function getQuestionnaire(type){
-
   var data = '&' + window.location.search.substring(1);
+  if(data === '&'){
+    // TODO show error message here
+    data = 'newQuestionnaire=1';
+  }
   console.log('data: ' + data);
 
   jQuery.ajax({
@@ -159,8 +167,8 @@ function getQuestionnaire(type){
     dataType: "text",
     data: data,
     success:function(response){
-      console.log("received questionnaire...");
-      console.log("response: " + response);
+      //console.log("received questionnaire...");
+      //console.log("response: " + response);
       var response_arr = response.split('~??~??~');
       if(response_arr[0] !== 'Error' && response_arr[1] !== 'Error'){
         $('#navbar-entries').html(response_arr[0]);

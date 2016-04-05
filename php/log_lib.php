@@ -63,7 +63,7 @@ function generateQuestions($construction_questions, $id){
                     <button type="button" class="col-xs-12 btn question-answer yes">' . $question_answers_arr[0] . '</button>
                     <button type="button" class="col-xs-12 btn question-answer no">' . $question_answers_arr[1] . '</button>
                     <div class="textfield">
-                      <textarea name="description" class="form-control" rows="5">Was stimmt nicht?</textarea>
+                      <textarea name="description" class="form-control" rows="5" placeholder="Was stimmt nicht?"></textarea>
                     </div>
                   </div>
                 </div>';
@@ -86,10 +86,10 @@ function generateMenu($names, $id){
       $number = $id;
       $name = $names;
     }
-    $tmp .= '<li><a href="#" data-construction="' . $number .'" class="construction_link">Bauwerk ' . $number . ' (' . $name . ')</a></li>';               
+    $tmp .= '<li><a href="#" data-construction="' . $number .'" class="construction_link">BW' . $number . ': ' . $name . '</a></li>';               
   }
 
-  $tmp .= '<li><a href="#" data-construction="0" class="construction_link">Abschließen</a></li>';
+  $tmp .= '<li><a href="#" data-construction="0" class="construction_link">→ Abschließen</a></li>';
   return $tmp;
 }
 
