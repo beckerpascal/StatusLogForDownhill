@@ -7,8 +7,7 @@ var send = true;
 var name = '';
 
 $(document).ready(function() {
-
-  getQuestionnaire(1);
+  getQuestionnaire();
   setSendButton('');
 
   window.onbeforeunload = function() {
@@ -150,10 +149,12 @@ function setSendButton(text){
 }
 
 function getQuestionnaire(type){
-  var data = '&newQuestionnaire=' + type;
+
+  var data = '&' + window.location.search.substring(1);
+  console.log('data: ' + data);
 
   jQuery.ajax({
-    type: "POST",
+    type: "GET",
     url: '../php/databaseQuery.php',
     dataType: "text",
     data: data,
@@ -177,4 +178,18 @@ function getQuestionnaire(type){
       console.log("Error: " + errorThrown); 
     } 
   });
+}
+
+function getQueryVariable(variable)
+{
+  var query = window.location.search.substring(1);
+  var vars = query.split("&");
+  for (var i=0;i<vars.length;i++){ 
+    var pair = vars[i].split("=");
+    console.log(pair[1]);
+    if(pair[0] == variable){
+      return pair[1];
+    }
+  }
+  return -1;
 }
