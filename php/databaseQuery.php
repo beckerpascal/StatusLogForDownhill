@@ -211,6 +211,29 @@ if(isset($_POST['getConstructions']) && $_POST['getConstructions'] > 0){
 
   mysqli_close($link);
 
+}else if(isset($_GET['sendQuestionnaire']) && $_GET['sendQuestionnaire'] > 0){
+
+  $link = mysqli_connect($host, $username, $pw, $db)or die('could not connect to database');
+
+  $sendQuestionnaire = $_GET['sendQuestionnaire'];
+  $name = $_GET['name'];
+  $type = $_GET['type'];
+  $conNr = $_GET['conNr'];
+  $answers = $_GET['answers'];
+
+  $isConstruction = 0;
+  if($conNr != -1){
+    $isConstruction = 1;
+  }
+
+  $insert = "INSERT INTO reports (quest_id, isConstruction, last_checked, last_controller, answers) VALUES (".$type.", ".$isConstruction.", NOW(), '".$name."', '".$answers."')";
+  echo $insert;
+  $result = mysqli_query($link, $insert) or die(mysqli_error($link));
+  
+  echo $result;
+
+  mysqli_close($link);
+
 }else{
   echo 'No post parameter was submitted...';
 }

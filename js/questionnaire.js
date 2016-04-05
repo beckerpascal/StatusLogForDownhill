@@ -4,7 +4,10 @@ var questions_amount;
 var questions_answered = 0;
 
 var send = true;
+
 var name = '';
+var type = -1;
+var conNr = -1;
 
 $(document).ready(function() {
   getData();
@@ -166,8 +169,7 @@ function setSendButton(text){
     if(questions_answered != questions_amount){
       $('#btn-send-msg').show();      
     }else{
-      $('#btn-send-msg').html('Erfolgreich verschickt!');
-      $('#btn-send-msg').show();      
+      sendData();  
     }
   });
 }
@@ -208,7 +210,57 @@ function getData(){
 }
 
 function sendData(){
+  var sep_groups = '~~';
+  var sep_elements = '||';
+  var data = '&sendQuestionnaire=1';
+  data += '&name=' + name;
+  data += '&type=' + type;
+  data += '&conNr=' + conNr;
+  data += '&answers=';
 
+  var last_q = -1;
+
+  for(var i = 0; i < questions_amount; i++){
+    var cur_q = $(questions[i]);
+    var id = cur_q.data('id');
+    if(id !== last_q){
+      if(last_q !== -1){
+        data += sep_groups;
+      }
+      last_q = id;
+      data += id + sep_elements;
+    }
+    var answers = cur_q.find('.question-answer');
+    if($(answers[0]).hasClass('btn-success')){
+      // Yes 
+      data += '1' + sep_elements;
+    }else{
+      // No
+      var textfield = cur_q.find('#no-description');
+      data += $(textfield).val() + sep_elements;
+    }
+  }
+  // TODO: remove last sep_element when group changes
+
+  console.log('Data for Backend: ' + data);
+
+  jQuery.ajax({
+    type: "GET",
+    url: '../php/databaseQuery.php',
+    dataType: "text",
+    data: data,
+    success:function(response){
+      console.log("success: " + response);
+      $('#btn-send-msg').html('Erfolgreich verschickt!');
+      $('#btn-send-msg').show();    
+    },
+    error: function(XMLHttpRequest, textStatus, errorThrown) { 
+      console.log("Status: " + textStatus); 
+      console.log("Error: " + errorThrown); 
+    } 
+  });
+
+  send = true;
 }
 
 function getQueryVariable(variable){
