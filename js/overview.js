@@ -15,10 +15,11 @@ function setNavBarLinks(){
   $(".nav > li > a").click(function(){
     if($(this).data('value') > 0){
       $(this).parent('li').addClass("active").siblings().removeClass("active");
-      getConstructions($(this).data("value")); 
+      type = $(this).data("value");
+      getConstructions(type); 
       var headings = $('.navbar-brand');
       for(var i = 0; i < headings.length; i++){
-        if($(headings[i]).data('value') === $(this).data("value")){
+        if($(headings[i]).data('value') === type){
           $(headings[i]).show();
         }else{
           $(headings[i]).hide();
