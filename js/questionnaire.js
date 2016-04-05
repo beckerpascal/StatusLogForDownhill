@@ -7,8 +7,7 @@ var send = true;
 var name = '';
 
 $(document).ready(function() {
-  getQuestionnaire();
-  setSendButton('');
+  getData();
 
   window.onbeforeunload = function() {
     if(!send){
@@ -51,6 +50,7 @@ function init(){
   questions_amount = questions.length - 1; // excludes confirmation page
   showQuestion(0);
   setProgressBarStatus();
+  setSendButton('');
 }
 
 function setMenuButtons(){
@@ -157,7 +157,8 @@ function setCurrentQuestionLinkActive(number){
 
 function setQuestionLinkDone(number){
   var cur_number = $(questions.get(cur_question)).data("construction");
-  $(".construction_link[data-construction='" + cur_number + "']").parent().addClass('question-success');
+  var link = $(".construction_link[data-construction='" + cur_number + "']");
+  link.html('<span class="glyphicon glyphicon-ok"></span>  ' + link.text());
 }
 
 function setSendButton(text){
@@ -171,7 +172,7 @@ function setSendButton(text){
   });
 }
 
-function getQuestionnaire(type){
+function getData(){
   var data = '&' + window.location.search.substring(1);
   if(data === '&'){
     // TODO show error message here
@@ -204,6 +205,10 @@ function getQuestionnaire(type){
       console.log("Error: " + errorThrown); 
     } 
   });
+}
+
+function sendData(){
+
 }
 
 function getQueryVariable(variable){
