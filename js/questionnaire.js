@@ -118,7 +118,7 @@ function checkIfAllQuestionsOfConstructionHaveBeenAnswered(){
 
 function setProgressBarStatus(){
     var progress_bar = $('.progress-bar');
-    progress_bar.width((questions_answered/questions_amount)*100 + '%');
+    progress_bar.width((questions_answered/questions_amount) * 100 + '%');
     $('#progressbar-text').text(questions_answered + '/' + questions_amount + ' Fragen beantwortet');
 
     if(questions_answered == questions_amount){
@@ -206,8 +206,7 @@ function getQuestionnaire(type){
   });
 }
 
-function getQueryVariable(variable)
-{
+function getQueryVariable(variable){
   var query = window.location.search.substring(1);
   var vars = query.split("&");
   for (var i=0;i<vars.length;i++){ 
