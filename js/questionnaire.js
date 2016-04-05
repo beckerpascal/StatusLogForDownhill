@@ -181,6 +181,12 @@ function getData(){
     data = 'newQuestionnaire=1';
   }
   console.log('data: ' + data);
+  conNr = getQueryVariable('checkConstruction');
+  if(getQueryVariable('conType') !== -1){
+    type = getQueryVariable('conType');
+  }else{
+    type = getQueryVariable('newQuestionnaire');
+  }
 
   jQuery.ajax({
     type: "GET",

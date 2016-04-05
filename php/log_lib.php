@@ -5,7 +5,7 @@ require_once('credentials.php');
 ini_set('display_errors', '1');
 error_reporting(E_ALL);
 
-function generateQuestions($construction_questions, $id){
+function generateQuestions($construction_ids, $construction_questions, $id){
   global $host, $db, $username, $pw;
 
   $questionnaire = true;
@@ -52,7 +52,7 @@ function generateQuestions($construction_questions, $id){
     for($j = 0; $j < sizeof($constructions_questions_arr); $j++){
       $construction_question_id = array_search($constructions_questions_arr[$j], $question_id);
       $question_answers_arr = explode(constant("SPLIT"), $question_answers[$construction_question_id]);
-      $tmp .= '<div class="row question" data-construction="' . $construction_data .'">
+      $tmp .= '<div class="row question" data-construction="' . $construction_data . '" data-id="' . $construction_ids[$i] . '">
                   <div class="col-md-12 padding-0">
                     <img class="center-block img-responsive" src="../img/' . $question_images[$construction_question_id] .'" />
                   </div>    
@@ -63,7 +63,7 @@ function generateQuestions($construction_questions, $id){
                     <button type="button" class="col-xs-12 btn question-answer yes">' . $question_answers_arr[0] . '</button>
                     <button type="button" class="col-xs-12 btn question-answer no">' . $question_answers_arr[1] . '</button>
                     <div class="textfield">
-                      <textarea name="description" class="form-control" rows="5" placeholder="Was stimmt nicht?"></textarea>
+                      <textarea name="description" class="form-control" rows="5" placeholder="Was stimmt nicht?" id="no-description"></textarea>
                     </div>
                   </div>
                 </div>';

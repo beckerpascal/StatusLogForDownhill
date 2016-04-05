@@ -167,7 +167,7 @@ if(isset($_POST['getConstructions']) && $_POST['getConstructions'] > 0){
 
     $html .= '~??~??~';
 
-    $html .= generateQuestions($construction_questions, -1);
+    $html .= generateQuestions(explode(constant("SPLIT"), $construction_ids), $construction_questions, -1);
 
     echo $html;
   }else{
@@ -187,6 +187,7 @@ if(isset($_POST['getConstructions']) && $_POST['getConstructions'] > 0){
   $query = 'SELECT * FROM constructions WHERE con_number="' . $construction_number . '" AND active="1" AND category="' . $construction_type . '"';
   $result = mysqli_query($link, $query) or die(mysqli_error($link));
 
+  $construction_id = 0;
   $construction_name = '';
   $construction_questions = '';
   $construction_number = 0;
@@ -194,6 +195,7 @@ if(isset($_POST['getConstructions']) && $_POST['getConstructions'] > 0){
   if(mysqli_num_rows($result) > 0)
   {
     while ($row = mysqli_fetch_object($result)) {
+      $construction_id = $row -> id;
       $construction_number = $row -> con_number;
       $construction_name = $row -> name;
       $construction_questions = $row -> question_ids;
@@ -201,7 +203,7 @@ if(isset($_POST['getConstructions']) && $_POST['getConstructions'] > 0){
 
     $html .= generateMenu($construction_name, $construction_number);
     $html .= '~??~??~';
-    $html .= generateQuestions($construction_questions, $construction_number);
+    $html .= generateQuestions($construction_id, $construction_questions, $construction_number);
 
     echo $html;
   }else{
