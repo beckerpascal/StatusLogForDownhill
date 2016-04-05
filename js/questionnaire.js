@@ -29,7 +29,7 @@ $(document).ready(function() {
     name = $('#username').val();
     console.log(name);
     if(name != ''){
-      $('#overlay').hide(500);
+      $('#overlay').hide();
       $('#main_content').show();
     }else{
       $('#username_error').show();
