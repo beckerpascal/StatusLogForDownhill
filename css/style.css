@@ -70,4 +70,8 @@ img{
     width: 100%;
     color: black;
     font-weight: bold;
- }
+}
+
+.table-vcenter td {
+   vertical-align: middle!important;
+}
