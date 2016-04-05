@@ -15,8 +15,8 @@ if(isset($_POST['getConstructions']) && $_POST['getConstructions'] > 0){
 
   $category = $_POST['getConstructions'];
 
-  $query = 'SELECT * FROM constructions WHERE category="' . $category . '" AND active=1 ORDER BY number ASC';
-  $result = mysqli_query($link, $query) or die(mysqli_error());
+  $query = 'SELECT * FROM constructions WHERE category="' . $category . '" AND active=1 ORDER BY con_number ASC';
+  $result = mysqli_query($link, $query) or die(mysqli_error($link));
 
   $output = '';
 
@@ -121,12 +121,12 @@ if(isset($_POST['getConstructions']) && $_POST['getConstructions'] > 0){
                   <td>' . $authorize_checked .    '</td>
                   <td>' . $authorize_controller . '</td>
                   <td>' . $authorize_text .       '</td>
-                  <td><i>TODO</i></td>
+                  <td><i><a class="btn btn-xs btn-default" href="questionnaire.html?checkConstruction=' . $row -> con_number . '&conType=' . $category . '" target="_blank">Prüfen</a></i></td>
                 </tr>
               ';
   }
 
-  mysqli_close();
+  mysqli_close($link);
 
   echo $output;
 
