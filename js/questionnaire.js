@@ -95,12 +95,25 @@ function setAnswerButtons(){
 }
 
 function questionAnswered(){
-  // check whether question was already answered
   if(!$('div.question:visible').hasClass('answered')){
     $('div.question:visible').addClass('answered');
     questions_answered++;
     setProgressBarStatus();
+    if(checkIfAllQuestionsOfConstructionHaveBeenAnswered()){
+      setQuestionLinkDone(cur_question);
+    }
   }
+}
+
+function checkIfAllQuestionsOfConstructionHaveBeenAnswered(){
+  var cur_number = $(questions.get(cur_question)).data("construction");
+  var group = $(".question[data-construction='" + cur_number + "']");
+  for (var i = 0; i < group.length; i++) {
+    if(!$(group[i]).hasClass('answered')){
+      return false;
+    }
+  };
+  return true;  
 }
 
 function setProgressBarStatus(){
@@ -140,6 +153,11 @@ function setCurrentQuestionLinkActive(number){
   $('li.active').removeClass('active');
   var cur_number = $(questions.get(cur_question)).data("construction");
   $(".construction_link[data-construction='" + cur_number + "']").parent().addClass('active');
+}
+
+function setQuestionLinkDone(number){
+  var cur_number = $(questions.get(cur_question)).data("construction");
+  $(".construction_link[data-construction='" + cur_number + "']").parent().addClass('question-success');
 }
 
 function setSendButton(text){

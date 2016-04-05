@@ -18,6 +18,10 @@ img{
   width: 100%;
 }
 
+.question-success{
+  background-color: #b2fcbf;
+}
+
 .textfield{
   margin-top: 15px;
   margin-bottom: 61px;
