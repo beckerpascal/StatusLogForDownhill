@@ -29,7 +29,7 @@ $(document).ready(function() {
     name = $('#username').val();
     console.log(name);
     if(name != ''){
-      $('#overlay').hide();
+      $('#overlay_username').hide();
       $('#main_content').show();
     }else{
       $('#username_error').show();
@@ -161,9 +161,16 @@ function getQuestionnaire(type){
       console.log("received questionnaire...");
       console.log("response: " + response);
       var response_arr = response.split('~??~??~');
-      $('#navbar-entries').html(response_arr[0]);
-      $('#questions').html(response_arr[1]);
-      init();
+      if(response_arr[0] !== 'Error' && response_arr[1] !== 'Error'){
+        $('#navbar-entries').html(response_arr[0]);
+        $('#questions').html(response_arr[1]);
+        init(); 
+      }else{
+        $('#overlay_error').show();
+        $('#overlay_username').hide();
+        $('#main_content').hide();
+      }
+
     },
     error: function(XMLHttpRequest, textStatus, errorThrown) { 
       console.log("Status: " + textStatus); 

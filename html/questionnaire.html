@@ -16,13 +16,20 @@
   </head>
   <body>
 
-  <div class="overlay" id="overlay">
+  <div class="overlay" id="overlay_username">
     <div class="overlay-content">
       <h3>Streckenchecker</h3>
       <span>Bitte Namen eintragen:</h3>
       <input type="text" size="10" class="form-control" id="username"/><br/>
       <span id="username_error" style="display: none;">Eingabe ungültig! Bitte erneut versuchen</span><br/>
       <button type="button" class="btn btn-default" id="btn-username">Weiter →</button>
+    </div>
+  </div>
+
+  <div class="overlay" id="overlay_error">
+    <div class="overlay-content">
+      <h3>Oh nein! Ein Plattfuß!</h3>
+      <span>Es ist ein Fehler aufgetreten. Bitte kehre zur Übersicht zurück und versuche es erneut! Danke!</span>
     </div>
   </div>
 
