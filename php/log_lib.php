@@ -44,8 +44,13 @@ function generateQuestions($construction_ids, $construction_questions, $id){
 
   // iterate through all constructions
   for($i = 0; $i < sizeof($construction_questions); $i++){
+    $con_que = $construction_questions[$i];
+    if(!$questionnaire){
+      $con_que = $construction_questions;
+    }
+
     // iterate through all questions
-    $constructions_questions_arr = explode(constant("SPLIT"), $construction_questions[$i]);
+    $constructions_questions_arr = explode(constant("SPLIT"), $con_que);
     $construction_data = $i + 1;
     if(!$questionnaire){
       $construction_data = $id;

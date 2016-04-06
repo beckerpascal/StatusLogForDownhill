@@ -226,6 +226,7 @@ if(isset($_POST['getConstructions']) && $_POST['getConstructions'] > 0){
   $isConstruction = 0;
   if($conNr != -1){
     $isConstruction = 1;
+    $type = $conNr;
   }
 
   $insert = "INSERT INTO reports (quest_id, isConstruction, last_checked, last_controller, answers) VALUES (".$type.", ".$isConstruction.", NOW(), '".$name."', '".$answers."')";
