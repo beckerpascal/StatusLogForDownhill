@@ -79,3 +79,7 @@ img{
 .table-vcenter td {
    vertical-align: middle!important;
 }
+
+#btn-new-report{
+  margin-right: 50px;
+}

@@ -17,6 +17,7 @@ function setNavBarLinks(){
       $(this).parent('li').addClass("active").siblings().removeClass("active");
       type = $(this).data("value");
       getConstructions(type); 
+      $("#btn-new-report").attr("href", "questionnaire.html?newQuestionnaire=" + type);
       var headings = $('.navbar-brand');
       for(var i = 0; i < headings.length; i++){
         if($(headings[i]).data('value') === type){
