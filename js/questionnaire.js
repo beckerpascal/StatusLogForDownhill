@@ -239,7 +239,7 @@ function sendData(){
     var answers = cur_q.find('.question-answer');
     if($(answers[0]).hasClass('btn-success')){
       // Yes 
-      data += '1' + sep_elements;
+      data += '0' + sep_elements;
     }else{
       // No
       var textfield = cur_q.find('#no-description');
