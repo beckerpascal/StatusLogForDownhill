@@ -42,6 +42,7 @@ function generateQuestions($construction_ids, $construction_questions, $id){
     $question_images[] = $row -> photo;
   }
 
+  $counter = 1;
   // iterate through all constructions
   for($i = 0; $i < sizeof($construction_questions); $i++){
     $con_que = $construction_questions[$i];
@@ -64,7 +65,7 @@ function generateQuestions($construction_ids, $construction_questions, $id){
                   </div>    
                   <div class="col-md-12">
                     <h3>
-                      ' . $question_text[$construction_question_id] . '
+                      Frage ' . $counter . ': ' . $question_text[$construction_question_id] . '
                     </h3>
                     <button type="button" class="col-xs-12 btn question-answer yes">' . $question_answers_arr[0] . '</button>
                     <button type="button" class="col-xs-12 btn question-answer no">' . $question_answers_arr[1] . '</button>
@@ -73,6 +74,7 @@ function generateQuestions($construction_ids, $construction_questions, $id){
                     </div>
                   </div>
                 </div>';
+      $counter++;
     }
   }
   mysqli_close($link);
