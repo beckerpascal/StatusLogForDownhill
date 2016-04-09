@@ -248,15 +248,17 @@ function sendData(){
       }
       last_q = id;
       data += id + sep_elements;
+    }else{
+      data += sep_elements;
     }
     var answers = cur_q.find('.question-answer');
     if($(answers[0]).hasClass('btn-success')){
       // Yes 
-      data += '0' + sep_elements;
+      data += '0';
     }else{
       // No
       var textfield = cur_q.find('#no-description');
-      data += $(textfield).val() + sep_elements;
+      data += $(textfield).val();
     }
   }
   // TODO: remove last sep_element when group changes
