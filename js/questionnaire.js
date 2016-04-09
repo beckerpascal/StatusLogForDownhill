@@ -16,7 +16,7 @@ $(document).ready(function() {
     if(!send){
       return "Möchtest du die Seite wirklich verlassen? Alle bisher getätigten Eingaben gehen verloren!";
     }
-  }
+  };
 
   $('#next').click(function(){
     nextQuestion();
@@ -38,7 +38,7 @@ $(document).ready(function() {
   });
 
   $('#username').keypress(function (e) {
-    if (e.which == 13) {
+    if (e.which === 13) {
       $('#btn-username').trigger('click');
       return false;
     }
@@ -63,7 +63,7 @@ function setMenuButtons(){
     var con_nr = $(this).data("construction");
     var goTo = 0;
     for(var i = 0; i < questions.length; i++){
-      if($(questions.get(i)).data('construction') == con_nr){
+      if($(questions.get(i)).data('construction') === con_nr){
         goTo = i;
         break;
       }
@@ -88,7 +88,7 @@ function setAnswerButtons(){
       $(this).addClass('btn-danger');
       var textfield = $(this).nextAll('.textfield');
       textfield.show();
-      textfield.on('input',function(e){
+      textfield.on('input',function(){
         questionAnswered();
       });
       $("html, body").animate({ scrollTop: $(document).height() }, "slow");
@@ -115,7 +115,7 @@ function checkIfAllQuestionsOfConstructionHaveBeenAnswered(){
     if(!$(group[i]).hasClass('answered')){
       return false;
     }
-  };
+  }
   return true;  
 }
 
@@ -124,7 +124,7 @@ function setProgressBarStatus(){
     progress_bar.width((questions_answered/questions_amount) * 100 + '%');
     $('#progressbar-text').text(questions_answered + '/' + questions_amount + ' Fragen beantwortet');
 
-    if(questions_answered == questions_amount){
+    if(questions_answered === questions_amount){
       progress_bar.addClass('progress-bar-success');
       $('#btn-send').addClass('btn-success');
     }
@@ -140,7 +140,7 @@ function previousQuestion(){
 
 function showQuestion(number){
   $(questions.get(cur_question)).hide(400);
-  cur_question = (number) % questions.length;
+  cur_question = number % questions.length;
   $(questions.get(cur_question)).show(400);
   setCurrentQuestion(cur_question);
   setCurrentQuestionLinkActive(cur_question);
@@ -158,15 +158,15 @@ function setCurrentQuestionLinkActive(number){
   $(".construction_link[data-construction='" + cur_number + "']").parent().addClass('active');
 }
 
-function setQuestionLinkDone(number){
+function setQuestionLinkDone(){
   var cur_number = $(questions.get(cur_question)).data("construction");
   var link = $(".construction_link[data-construction='" + cur_number + "']");
   link.html('<span class="glyphicon glyphicon-ok"></span>  ' + link.text());
 }
 
-function setSendButton(text){
+function setSendButton(){
   $('#btn-send').on('click', function(){
-    if(questions_answered != questions_amount){
+    if(questions_answered !== questions_amount){
       $('#btn-send-msg').show();      
     }else{
       sendData();  
@@ -274,7 +274,7 @@ function getQueryVariable(variable){
   var vars = query.split("&");
   for (var i=0;i<vars.length;i++){ 
     var pair = vars[i].split("=");
-    if(pair[0] == variable){
+    if(pair[0] === variable){
       return pair[1];
     }
   }
