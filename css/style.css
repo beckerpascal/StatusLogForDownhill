@@ -83,3 +83,8 @@ img{
 #btn-new-report{
   margin-right: 50px;
 }
+
+#btn-send-msg{
+  text-align: justify;
+  padding-bottom: 30px;
+}

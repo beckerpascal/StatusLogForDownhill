@@ -167,7 +167,20 @@ function setQuestionLinkDone(){
 function setSendButton(){
   $('#btn-send').on('click', function(){
     if(questions_answered !== questions_amount){
-      $('#btn-send-msg').show();      
+      var question_numbers = 'Es müssen alle Fragen beantwortet sein, damit der Bericht gesendet werden kann!<br/><strong>Folgende Fragen wurden nicht beantwortet:<br/>';
+      $(questions).each(function(index, el) {
+        if(!$(this).hasClass('answered')){
+          if(index < questions_amount){
+            question_numbers += (index + 1);            
+          }
+          if(index < questions_amount - 1){
+            question_numbers += ', ';
+          }
+        }
+      });
+      $('#btn-send-msg').html(question_numbers + '</strong>');
+      $('#btn-send-msg').show();
+      console.log(question_numbers);
     }else{
       sendData();  
     }
