@@ -6,6 +6,9 @@ require_once('credentials.php');
 ini_set('display_errors', '1');
 error_reporting(E_ALL);
 
+define("EMPTY","---");
+define("SPLIT","|");
+
 function generateQuestions($construction_ids, $construction_questions, $id){
   global $host, $db, $username, $pw;
 
@@ -99,6 +102,31 @@ function generateMenu($names, $id){
 
   $tmp .= '<li><a href="#" data-construction="0" class="construction_link">Abschließen</a></li>';
   return $tmp;
+}
+
+function resetConstruction($id){
+  global $host, $db, $username, $pw;
+
+  $link = mysqli_connect($host, $username, $pw, $db) or die('Error: ' . mysqli_error());
+  $reset = "UPDATE constructions SET last_checked=null, last_controller='', last_comment='" . constant("EMPTY") . "', maintain_checked=null, maintain_controller='', maintain_comment='" . constant("EMPTY") . "', authorize_checked=null, authorize_controller='', authorize_comment='" . constant("EMPTY") . "' WHERE id=" . $id;
+  echo 'RESETTING: ' . $reset;
+  mysqli_query($link, $reset);
+  mysqli_close($link);
+}
+
+function getQuestionText($id){
+  global $host, $db, $username, $pw;
+
+  $link = mysqli_connect($host, $username, $pw, $db) or die('Error: ' . mysqli_error());
+  $question_text = '';
+  $query = "SELECT question FROM questions WHERE id=" . $id;
+  echo 'question_query: ' . $query;
+  $result = mysqli_query($link, $query) or die(mysqli_error($link));
+  while ($row = mysqli_fetch_object($result)) {
+    $question_text = $row -> question;
+  }
+  mysqli_close($link);
+  return $question_text;
 }
 
 ?>

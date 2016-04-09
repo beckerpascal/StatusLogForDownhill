@@ -6,8 +6,6 @@ error_reporting(E_ALL);
 require_once('credentials.php');
 require_once('log_lib.php');
 
-define("EMPTY","---");
-define("SPLIT","|");
 
 if(isset($_POST['getConstructions']) && $_POST['getConstructions'] > 0){
 
@@ -22,25 +20,33 @@ if(isset($_POST['getConstructions']) && $_POST['getConstructions'] > 0){
 
   while ($row = mysqli_fetch_object($result)) {
 
-    $status = '';
-    $status_text = '';
+    $construction_status = '';
+    $construction_status_text = '';
+    $button_text = '';
     switch ($row -> current_status) {
       case 0:
-        // $status = 'success';
-        $status = '';
-        $status_text = 'fahrbereit';
+        $construction_status = '';
+        $construction_status_text = 'fahrbereit';
+        $button_text = 'prüfen';
+        $button_status = 'btn-default';
         break;
-      case 1:
-        $status = 'info';
-        $status_text = 'Prüf. fällig';
+      case 1;
+        $construction_status = 'danger';
+        $construction_status_text = 'Rep. fällig';
+        $button_text = 'warten';
+        $button_status = 'btn-danger';
         break;
       case 2;
-        $status = 'danger';
-        $status_text = 'Rep. fällig';
+        $construction_status = 'warning';
+        $construction_status_text = 'Freig. fällig';
+        $button_text = 'freigeben';
+        $button_status = 'btn-warning';
         break;
-      case 3;
-        $status = 'warning';
-        $status_text = 'Freig. fällig';
+      case 3: // TODO Cronjob for testing date and mail
+        $construction_status = 'info';
+        $construction_status_text = 'Prüf. fällig';
+        $button_text = 'warten';
+        $button_status = 'btn-info';
         break;
     }
 
@@ -60,10 +66,10 @@ if(isset($_POST['getConstructions']) && $_POST['getConstructions'] > 0){
       $last_controller = constant("EMPTY");    
     }
 
-    if(isset($row -> last_text)){
-      $last_text = $row -> last_text;
+    if(isset($row -> last_comment)){
+      $last_comment = $row -> last_comment;
     }else{
-      $last_text = constant("EMPTY");    
+      $last_comment = constant("EMPTY");    
     }
 
 
@@ -80,10 +86,10 @@ if(isset($_POST['getConstructions']) && $_POST['getConstructions'] > 0){
       $maintain_controller = constant("EMPTY");    
     }
 
-    if(isset($row -> maintain_text)){
-      $maintain_text = $row -> maintain_text;
+    if(isset($row -> maintain_comment)){
+      $maintain_comment = $row -> maintain_comment;
     }else{
-      $maintain_text = constant("EMPTY");    
+      $maintain_comment = constant("EMPTY");    
     }
 
     
@@ -100,28 +106,28 @@ if(isset($_POST['getConstructions']) && $_POST['getConstructions'] > 0){
       $authorize_controller = constant("EMPTY");    
     }
 
-    if(isset($row -> authorize_text)){
-      $authorize_text = $row -> authorize_text;
+    if(isset($row -> authorize_comment)){
+      $authorize_comment = $row -> authorize_comment;
     }else{
-      $authorize_text = constant("EMPTY");    
+      $authorize_comment = constant("EMPTY");    
     }
 
     $output .= '
-                <tr class="' . $status . '">
+                <tr class="' . $construction_status . '">
                   <td>' . $row -> con_number .        '</td>
                   <td>' . $row -> name .          '</td>
-                  <td>' . $status_text .          '</td>
+                  <td>' . $construction_status_text .          '</td>
                   <td>' . $interval .             '</td>
                   <td>' . $last_checked .         '</td>
                   <td>' . $last_controller .      '</td>
-                  <td>' . $last_text .            '</td>
+                  <td>' . $last_comment .         '</td>
                   <td>' . $maintain_checked .     '</td>
                   <td>' . $maintain_controller .  '</td>
-                  <td>' . $maintain_text .        '</td>
+                  <td>' . $maintain_comment .     '</td>
                   <td>' . $authorize_checked .    '</td>
                   <td>' . $authorize_controller . '</td>
-                  <td>' . $authorize_text .       '</td>
-                  <td><i><a class="btn btn-xs btn-default" href="questionnaire.html?checkConstruction=' . $row -> con_number . '&conType=' . $category . '" target="_blank">Prüfen</a></i></td>
+                  <td>' . $authorize_comment .    '</td>
+                  <td><i><a class="btn btn-xs ' . $button_status . '" href="questionnaire.html?checkConstruction=' . $row -> con_number . '&conType=' . $category . '" target="_blank">' . $button_text . '</a></i></td>
                 </tr>
               ';
   }
@@ -178,7 +184,7 @@ if(isset($_POST['getConstructions']) && $_POST['getConstructions'] > 0){
 
 }else if(isset($_GET['checkConstruction']) && $_GET['checkConstruction'] > 0){
 
-  $link = mysqli_connect($host, $username, $pw, $db)or die('could not connect to database');
+  $link = mysqli_connect($host, $username, $pw, $db) or die('could not connect to database');
 
   $construction_number = $_GET['checkConstruction'];
   $construction_type = $_GET['conType'];
@@ -215,7 +221,7 @@ if(isset($_POST['getConstructions']) && $_POST['getConstructions'] > 0){
 
 }else if(isset($_GET['sendQuestionnaire']) && $_GET['sendQuestionnaire'] > 0){
 
-  $link = mysqli_connect($host, $username, $pw, $db)or die('could not connect to database');
+  $link = mysqli_connect($host, $username, $pw, $db) or die('could not connect to database');
 
   $sendQuestionnaire = $_GET['sendQuestionnaire'];
   $name = $_GET['name'];
@@ -232,10 +238,73 @@ if(isset($_POST['getConstructions']) && $_POST['getConstructions'] > 0){
   $insert = "INSERT INTO reports (quest_id, isConstruction, last_checked, last_controller, answers) VALUES (".$type.", ".$isConstruction.", NOW(), '".$name."', '".$answers."')";
   echo $insert;
   $result = mysqli_query($link, $insert) or die(mysqli_error($link));
-  
-  echo $result;
 
+  // iterate through constructions
+  $answers_arr = explode('~~', $answers);
+  for($i = 0; $i < sizeof($answers_arr); $i++){
+    $question_arr = explode('||', $answers_arr[$i]);
+    $construction_id = $question_arr[0];
+    $question_ids = '';
+    $current_status = -1;
+    $query = "SELECT question_ids, current_status FROM constructions WHERE id=" . $construction_id;
+    $result = mysqli_query($link, $query) or die(mysqli_error($link));
+    while ($row = mysqli_fetch_object($result)) {
+      $question_ids = $row -> question_ids;
+      $current_status = $row -> current_status;
+    }
+
+    if($current_status == 0){
+      resetConstruction($construction_id);
+    }
+
+    $current_target = 'last';
+    switch ($current_status) {
+      case 1:
+        $current_target = 'maintain';
+        break;
+      case 2:
+        $current_target = 'authorize';
+        break;
+      default:
+        $current_target = 'last';
+        break;
+    }
+    
+    // iterate through questions
+    $problems = '';
+    $construction_status = 0;
+    $question_ids_arr = explode('|', $question_ids);
+    for($j = 1; $j < sizeof($question_arr); $j++){ // 0 is construction id
+      if($question_arr[$j] != '0'){
+        echo $i . '/' . $j . ':' . $question_arr[$j] . ' - ';
+        $construction_status = 1;
+        $question_text = getQuestionText($question_ids[$j - 1]);
+        $problems .= '<i>' . $question_text . '</i><br/>' . $question_arr[$j] . '<br/>';
+      }
+    }
+
+    $next_status = 0;
+    if($construction_status == 1){
+      $next_status = $current_status + 1;
+    }else{
+      $next_status = 0;
+      $problems = 'i.O.';
+    }
+
+    // TODO: format answers + get question text
+    // TODO: switch between check, maintain and authorize
+    $update = "UPDATE constructions SET current_status=" . $next_status . ", " . $current_target ."_checked=NOW(), " . $current_target ."_controller='" . $name . "', " . $current_target ."_comment='" . $problems . "' WHERE id='" . $construction_id . "'";
+    echo 'Update: ' . $update;
+    mysqli_query($link, $update);
+  }
+  
   mysqli_close($link);
+
+}
+else if(isset($_GET['resetConstruction']) && $_GET['resetConstruction'] > 0){
+
+  resetConstruction($_GET['resetConstruction']);
+  echo 'Success';
 
 }else{
   echo 'No post parameter was submitted...';
