@@ -97,7 +97,7 @@ function generateMenu($names, $id){
     $tmp .= '<li><a href="#" data-construction="' . $number .'" class="construction_link">BW' . $number . ': ' . $name . '</a></li>';               
   }
 
-  $tmp .= '<li><a href="#" data-construction="0" class="construction_link"><span class="glyphicon glyphicon-ok"></span>  Abschließen</a></li>';
+  $tmp .= '<li><a href="#" data-construction="0" class="construction_link">Abschließen</a></li>';
   return $tmp;
 }
 
