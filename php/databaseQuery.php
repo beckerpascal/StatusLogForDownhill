@@ -117,16 +117,16 @@ if(isset($_POST['getConstructions']) && $_POST['getConstructions'] > 0){
                   <td>' . $row -> con_number .        '</td>
                   <td>' . $row -> name .          '</td>
                   <td>' . $construction_status_text .          '</td>
-                  <td>' . $interval .             '</td>
+                  <td class="table-border-right">' . $interval .             '</td>
                   <td>' . $last_checked .         '</td>
                   <td>' . $last_controller .      '</td>
-                  <td>' . $last_comment .         '</td>
+                  <td class="table-border-right">' . $last_comment .         '</td>
                   <td>' . $maintain_checked .     '</td>
                   <td>' . $maintain_controller .  '</td>
-                  <td>' . $maintain_comment .     '</td>
+                  <td class="table-border-right">' . $maintain_comment .     '</td>
                   <td>' . $authorize_checked .    '</td>
                   <td>' . $authorize_controller . '</td>
-                  <td>' . $authorize_comment .    '</td>
+                  <td class="table-border-right">' . $authorize_comment .    '</td>
                   <td><i><a class="btn btn-xs ' . $button_status . '" href="questionnaire.html?checkConstruction=' . $row -> con_number . '&conType=' . $category . '" target="_blank">' . $button_text . '</a></i></td>
                 </tr>
               ';
