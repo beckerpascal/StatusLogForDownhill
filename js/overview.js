@@ -13,19 +13,29 @@ function init(){
 
 function setNavBarLinks(){
   $(".nav > li > a").click(function(){
-    if($(this).data('value') > 0){
+    var value = $(this).data('value');
+    if(value > 0){
       $(this).parent('li').addClass("active").siblings().removeClass("active");
-      type = $(this).data("value");
-      getConstructions(type); 
-      $("#btn-new-report").attr("href", "questionnaire.html?newQuestionnaire=" + type);
-      var headings = $('.navbar-brand');
-      for(var i = 0; i < headings.length; i++){
-        if($(headings[i]).data('value') === type){
-          $(headings[i]).show();
-        }else{
-          $(headings[i]).hide();
+      if(value < 3){
+        getConstructions(value);
+        $('#construction_list').show();
+        $('#reports').hide();
+        $("#btn-new-report").removeClass('disabled');
+        $("#btn-new-report").attr("href", "questionnaire.html?newQuestionnaire=" + value);
+        var headings = $('.navbar-brand');
+        for(var i = 0; i < headings.length; i++){
+          if($(headings[i]).data('value') === value){
+            $(headings[i]).show();
+          }else{
+            $(headings[i]).hide();
+          }
         }
-      }
+      }else if(value === 3){
+        $('#construction_list').hide();
+        $('#reports').show();
+        $("#btn-new-report").addClass('disabled');
+        $("#btn-new-report").attr("href", "");      
+      }      
     }
   });
 }
