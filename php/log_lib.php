@@ -19,14 +19,21 @@ function generateQuestions($construction_ids, $construction_questions, $id){
 
   $tmp = '';
 
-  $questions = '(';
-  for($i = 0; $i < sizeof($construction_questions); $i++){
-    $questions .= str_replace(constant("SPLIT"), ",", $construction_questions[$i]);
-    if($i != sizeof($construction_questions) - 1){
-      $questions .= ',';
+  $questions = '';
+  if(sizeof($construction_questions) == 1 && !is_array($construction_questions)){
+    $questions = '(';
+    $questions .= str_replace(constant("SPLIT"), ",", $construction_questions);
+    $questions .= ')';
+  }else{
+    $questions = '(';
+    for($i = 0; $i < sizeof($construction_questions); $i++){
+      $questions .= str_replace(constant("SPLIT"), ",", $construction_questions[$i]);
+      if($i != sizeof($construction_questions) - 1){
+        $questions .= ',';
+      }
     }
-  }
-  $questions .= ')';
+    $questions .= ')';
+}
 
   $link = mysqli_connect($host, $username, $pw, $db) or die('Error: ' . mysqli_error());
 
