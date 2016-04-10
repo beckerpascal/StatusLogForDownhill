@@ -278,7 +278,7 @@ if(isset($_POST['getConstructions']) && $_POST['getConstructions'] > 0){
       if($question_arr[$j] != '0'){
         echo $i . '/' . $j . ':' . $question_arr[$j] . ' - ';
         $construction_status = 1;
-        $question_text = getQuestionText($question_ids[$j - 1]);
+        $question_text = getQuestionText($question_ids_arr[$j - 1]);
         $problems .= '<i>' . $question_text . '</i><br/>' . $question_arr[$j] . '<br/>';
       }
     }
