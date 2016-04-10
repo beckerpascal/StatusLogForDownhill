@@ -89,11 +89,3 @@ img{
   text-align: center;
   padding-bottom: 30px;
 }
-
-#overview th{
-  text-align: center;
-}
- 
-.table-border-right{
-  border-right: 1px solid #ddd; 
-}
