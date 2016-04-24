@@ -12,6 +12,7 @@ img{
 
 .question{
   display: none;
+  padding-bottom: 50px;
 }
 
 .question textarea{
